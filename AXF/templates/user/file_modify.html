@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block ext_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'axf/user/css/file_modify.css' %}">
+{% endblock %}
+
+{% block ext_js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'axf/user/js/file_modify.js' %}"></script>
+{% endblock %}
+
+{% block header %}
+    {{ block.super }}
+    <header></header>
+{% endblock %}
+
+{% block content %}
+    {{ block.super }}
+
+    <div id="container">
+        <form action="{% url 'axf:file_modify' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="new_name">用户名：</label>
+                <input type="password" class="form-control" name="new_name" value="{{ user.u_username }}" id="new_name" placeholder="请输入用户名">
+            </div>
+            <div class="form-group">
+                <label for="new_email">邮箱：</label>
+                <input type="email" class="form-control" name="new_email" value="{{ user.u_email }}" id="new_email" placeholder="请输入邮箱">
+            </div>
+            <div class="form-group">
+                <label for="password">旧密码：</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="请输入旧密码">
+            </div>
+            <div class="form-group">
+                <label for="new_password">新密码：</label>
+                <input type="password" class="form-control" name="new_password" id="new_password" placeholder="请输入新密码">
+            </div>
+            <div class="form-group">
+                <label for="new_password_confirm">确认新密码：</label>
+                <input type="password" class="form-control" name="new_password_confirm" id="new_password_confirm" placeholder="请确认新密码">
+            </div>
+            <div class="form-group">
+                <label for="new_icon">头像：</label>
+                <img class="img-circle" src="{{ icon_url }}" alt="">
+                <input type="file" name="new_icon" id="new_icon">
+            </div>
+            <button type="submit" class="btn btn-success btn-block">确认修改</button>
+        </form>
+    </div>
+{% endblock %}

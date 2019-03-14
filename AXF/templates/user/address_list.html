@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block ext_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'axf/user/css/address_list.css' %}">
+{% endblock %}
+
+{% block ext_js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'axf/user/js/address_list.js' %}"></script>
+{% endblock %}
+
+{% block header %}
+    {{ block.super }}
+    <header>请选择收货地址</header>
+{% endblock %}
+
+{% block content %}
+    {{ block.super }}
+
+    <div id="address" class="container">
+        <ul>
+            {% for address in add_list %}
+                <li id="{{ address.id }}">
+                    <a href="{% url 'app:choose_address' address_id = address.id %}">{{ address.a_address }}</a>
+                </li>
+            {% endfor %}
+
+        </ul>
+        <div id="address_input">
+            <input name="new_address" style="width: 100%" id="new_address" type="text" placeholder="256个字符以内">
+            <button id="add_address" class="btn btn-success btn-block">添加新地址</button>
+        </div>
+    </div>
+
+{% endblock %}
